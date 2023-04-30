@@ -1,0 +1,167 @@
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: math !important;
+  background-image: url(./assets/bg.jpg);
+}
+
+
+ul {
+  list-style: none;
+  width: 80%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+
+}
+
+ul li {
+  width: 100%;
+  padding: 19px;
+  background-color: #f5f8fa;
+  border: 2px solid #ddd;
+  color: #192633;
+  font-weight: 600;
+  border-radius: 5px;
+  padding-left: 15px;
+  margin-bottom: 10px;
+  min-height: 60px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+ul li:hover {
+  border-color: #192633;
+  border-style: dashed;
+}
+
+ul li .actions {
+  float: right;
+}
+
+ul li .actions a {
+  font-size: 18px;
+  margin-left: 10px;
+  padding: 0px 4px;
+  cursor: pointer;
+}
+
+.fa-eye {
+  color: #1b8c1b;
+}
+
+.fa-pencil-square-o {
+
+  color: #1111d6e0;
+}
+
+.fa-times {
+  color: #cc2944;
+}
+
+.product_form {
+  padding-top: 60px;
+  margin: 0 auto;
+  width: 60%;
+}
+
+.title {
+  background-color: #192633;
+  color: #f2f2f2;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 20px;
+  padding: 0;
+  line-height: 2.5
+}
+
+label {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+input,
+textarea {
+  border-radius: 4px;
+  width: 100%;
+  background-color: #fafbfc;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, .1);
+  color: #192633;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.redBtn {
+  border-radius: 5px;
+  background-color: #fae9ec;
+  border-width: 0px;
+  color: #cc2944;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.2;
+  padding: 10px 13px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid;
+}
+
+.redBtn:hover {
+  background-color: #cc2944;
+  color: #fff;
+}
+
+.margin-bottom-30 {
+  margin-bottom: 30px
+}
+
+.submitBtn {
+  color: #fae9ec;
+  background-color: #cc2944;
+  border: 1px solid;
+  border-radius: 5px;
+  border-width: 0px;
+  padding: 5px 30px;
+  font-weight: 500;
+  margin: 0 auto;
+  width: 15%;
+  justify-content: center;
+  display: flex;
+  text-transform: uppercase;
+}
+
+.notification {
+  background-color: #1b8c1b;
+  color: white;
+  padding: 15px;
+  float: right;
+  border-radius: 10px;
+}
+
+.no_available {
+  width: 50%;
+  background-color: white;
+  margin: 0 auto;
+  height: 15vh;
+  font-size: 18px;
+  padding: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.required {
+  color: #cc2944;
+}
+
+
+@media (max-width: 768px) {
+  .product_form {
+    margin-bottom: 30px;
+  }
+
+  .notification {
+    margin-top: 20px;
+  }
+}
