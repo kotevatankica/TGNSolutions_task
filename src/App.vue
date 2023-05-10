@@ -18,7 +18,6 @@
           aria-hidden="true"></i>
       </a>
 
-
     </div>
   </div>
 </template>
@@ -47,7 +46,6 @@
   margin: 0 auto;
   padding: 7px 14px;
   border-radius: 5px;
-  box-sizing: border-box;
   border: none;
   border-bottom: 2px solid;
 }

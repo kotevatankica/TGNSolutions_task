@@ -9,7 +9,9 @@ export default {
                 }
         },
         mounted() {
-                this.invoice = JSON.parse(localStorage.getItem('selectedInvoice'))
+                const invoices = JSON.parse(localStorage.getItem('invoices'))
+                const index = this.$route.params.invoiceNumber;
+                this.invoice = invoices[index]
         }
 }
 </script>
@@ -23,9 +25,7 @@ export default {
                 </div>
                 <div class="form">
                         <div class="row">
-
                                 <div class="col-md-4">
-
                                         Invoice Number:
                                 </div>
                                 <div class="col-md-8">
@@ -41,7 +41,6 @@ export default {
                                 </div>
                         </div>
                         <div class="row">
-
                                 <div class="col-md-4">
                                         Date:
                                 </div>

@@ -9,7 +9,9 @@ export default {
                 }
         },
         mounted() {
-                this.product = JSON.parse(localStorage.getItem('selectedProduct'))
+                const products = JSON.parse(localStorage.getItem('products'))
+                const index = this.$route.params.name;
+                this.product = products[index]
         }
 }
 </script>
@@ -66,5 +68,4 @@ export default {
 .col-md-8 {
         margin-bottom: 30px;
 }
-
 </style>

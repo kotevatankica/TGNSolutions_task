@@ -15,11 +15,10 @@ export default {
 
                         });
                 },
-                viewProduct(product) {
-                        localStorage.setItem("selectedProduct", JSON.stringify(product));
+                viewProduct(index) {
                         this.$router.push({
                                 name: "ViewProduct",
-                                params: { name: product.name }
+                                params: { name: index }
                         });
                 },
                 editProduct(product) {
@@ -57,26 +56,19 @@ export default {
                         <li v-for="(product, index) in products" :key="index">
                                 <span> {{ product.name }}</span>
                                 <span class="actions">
-
-                                        <a @click="viewProduct(product)">
+                                        <a @click="viewProduct(index)">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
-
                                         </a>
                                         <a @click="editProduct(product)">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                         <a @click="deleteProduct($event, index)"><i class="fa fa-times" aria-hidden="true"></i>
-
                                         </a>
-
-
-
                                 </span>
                         </li>
                 </ul>
         </div>
         <div v-else>
-
                 <p class="no_available">There are currently no products available.</p>
         </div>
 </template>

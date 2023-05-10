@@ -19,19 +19,16 @@ export default {
                 }
         },
         methods: {
-
                 createInvoice() {
                         this.$router.push({
                                 name: "CreateInvoice",
                                 query: { mode: "Create" }
                         });
                 },
-                viewInvoice(invoice) {
-                        localStorage.setItem("selectedInvoice", JSON.stringify(invoice));
-
+                viewInvoice(index) {
                         this.$router.push({
                                 name: "ViewInvoice",
-                                params: { invoiceNumber: invoice.invoiceNumber }
+                                params: { invoiceNumber: index}
                         });
                 },
                 editInvoice(invoice) {
@@ -74,15 +71,16 @@ export default {
         </div>
         <div v-if="invoices.length" class="container ">
                 <ul>
-                        <li v-for="(  invoice, index  ) in   filteredInvoices  " :key="index">
+                        <li v-for="(  invoice, index  ) in   filteredInvoices  " :key="index"
+                                :class="{ 'notpaid': invoice.isPaid == 'notPaid' }">
                                 <div class="row">
                                         <div class="col-md-4"> {{ invoice.invoiceNumber }}</div>
                                         <div class="col-md-3">{{ invoice.date }} </div>
-                                        <div class="col-md-3" v-if="invoice.isPaid == 'paid'"> Paid </div>
-                                        <div class="col-md-3" v-else> Not paid</div>
+                                        <div class="col-md-3 " v-if="invoice.isPaid == 'paid'"> Paid </div>
+                                        <div class="col-md-3 " v-else> Not paid</div>
 
                                         <div class="col-md-2 actions">
-                                                <a @click="viewInvoice(invoice)">
+                                                <a @click="viewInvoice(index)">
                                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                                 <a @click="editInvoice(invoice)">
@@ -111,6 +109,10 @@ select {
         padding: 5px;
         border-color: #cc2944;
 
+}
+
+.notpaid {
+        color: red !important;
 }
 
 @media (max-width: 768px) {

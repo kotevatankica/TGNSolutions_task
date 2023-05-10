@@ -16,17 +16,35 @@ export default {
         },
         computed: {
                 description() {
+
+                        let desc = '';
+                        if (this.$route.query.mode === 'Edit') {
+
+                                if (this.edit_inovoice) {
+                                        desc = this.edit_inovoice.description
+                                }
+                        }
+
                         if (this.selected_products !== "0") {
-                                let desc = '';
+
                                 this.selected_products.forEach(el => {
                                         desc += `${el.name} * ${el.quantity}, `;
                                 })
                                 return desc;
                         }
+
                 },
                 totalPrice() {
+                        let sum = 0;
+
+                        if (this.$route.query.mode === 'Edit') {
+
+                                if (this.edit_inovoice) {
+                                        sum = this.edit_inovoice.totalPrice
+                                }
+                        }
+
                         if (this.selected_products !== "0") {
-                                let sum = 0;
                                 this.selected_products.forEach(el => {
                                         sum += el.price * el.quantity;
 
@@ -68,6 +86,7 @@ export default {
                                 this.selected_products.splice(this.selected_products.indexOf(product), 1);
                         }
 
+
                 },
                 saveInvoice() {
 
@@ -106,32 +125,29 @@ export default {
                         }
                         else {
 
-                                // edit invoice 
-                                // cannot display description and total price (they are computed property)
+                                const edited_invoice = {
+                                        invoiceNumber: this.invoiceNumber,
+                                        customerName: this.customerName,
+                                        date: this.selectedDate,
+                                        description: this.description,
+                                        totalPrice: this.totalPrice,
+                                        isPaid: this.isPaid
+                                };
 
-                                // const edited_invoice = {
-                                //         invoiceNumber: this.invoiceNumber,
-                                //         customerName: this.customerName,
-                                //         date: this.selectedDate,
-                                //         description: this.description,
-                                //         totalPrice: this.totalPrice,
-                                //         isPaid: this.isPaid
-                                // };
-
-                                // const all_invoices = JSON.parse(localStorage.getItem('invoices'))
+                                const all_invoices = JSON.parse(localStorage.getItem('invoices'))
 
 
-                                // const index_invoice = all_invoices.findIndex(p => p.invoiceNumber === this.edit_inovoice.invoiceNumber)
-                                // all_invoices.splice(index_invoice, 1)
-                                // all_invoices.splice(index_invoice, 0, edited_invoice)
+                                const index_invoice = all_invoices.findIndex(p => p.invoiceNumber === this.edit_inovoice.invoiceNumber)
+                                all_invoices.splice(index_invoice, 1)
+                                all_invoices.splice(index_invoice, 0, edited_invoice)
 
-                                // localStorage.setItem('invoices', JSON.stringify(all_invoices));
+                                localStorage.setItem('invoices', JSON.stringify(all_invoices));
 
-                                // this.message = `Invoice  ${this.invoiceNumber} is created.`
+                                this.message = `Invoice  ${this.invoiceNumber} is created.`
 
-                                // setTimeout(() => {
-                                //         this.message = ''
-                                // }, 5000)
+                                setTimeout(() => {
+                                        this.message = ''
+                                }, 5000)
                         }
                 },
 
@@ -177,7 +193,6 @@ export default {
                                         {{ product.name }} - {{ product.price }} &#8364;
                                         <div class="quantity">
                                                 <a @click="decrementQuantity(product)" v-if="product.quantity > 0">-</a>
-
                                                 <span v-if="selected_products.length == 0"> {{ product.quantity = 0 }}</span>
                                                 <span v-else>{{ product.quantity || 0 }}</span>
                                                 <a @click="incrementQuantity(product)">+</a>
@@ -215,13 +230,14 @@ export default {
                                 <div class="row">
                                         <div class="col-md-12 margin-bottom-30">
                                                 <label for="">Description:</label>
-                                                <textarea type="text" name="description" id="" :value="description"></textarea>
+                                                <textarea type="text" name="description" id="" v-model="description"
+                                                        readonly></textarea>
                                         </div>
                                 </div>
                                 <div class="row">
                                         <div class="col-md-6 margin-bottom-30">
                                                 <label for="price">Total price (&#8364;):</label>
-                                                <input type="number" name="price" id="" :value="totalPrice">
+                                                <input type="number" name="price" id="" v-model="totalPrice" readonly>
                                         </div>
                                         <div class="col-md-6 margin-bottom-30">
                                                 <label for="paid">Paid:</label>
